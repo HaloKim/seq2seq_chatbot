@@ -1,0 +1,15 @@
+*.txt
+*.cfg
+*.weights
+*.mp4
+*.jpg
+*.DS_Store
+*.pyc
+*.csv
+*.names
+mot_benchmark
+*.xml
+*.iml
+*.pkl
+*.h5
+*checkpoints*

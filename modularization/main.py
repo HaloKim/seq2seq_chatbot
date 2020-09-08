@@ -64,17 +64,7 @@ y_decoder = d_loader.one_hot(y_decoder, words)
 # 모델로드
 build = build_models.BuildModel(words, d_loader.embedding_dim, d_loader.lstm_hidden_dim)
 
-build.train_model()
-
-# --------------------------------------------
-# 훈련 모델 정의
-# --------------------------------------------
-
-# 입력과 출력으로 함수형 API 모델 생성
-model = models.Model([build.encoder_inputs, build.decoder_inputs], build.decoder_outputs)
-
-# 학습 방법 설정
-model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+model = build.train_model()
 
 encoder_model, decoder_model = build.predict_model()
 

@@ -4,9 +4,8 @@ from keras import models
 
 class BuildModel:
 
-    def __init__(self, words, embedding_dim, lstm_hidden_dim):
-
-        self.words = words
+    def __init__(self, len_words, embedding_dim, lstm_hidden_dim):
+        self.len_words = len_words
         self.embedding_dim = embedding_dim
         self.lstm_hidden_dim = lstm_hidden_dim
 
@@ -15,7 +14,7 @@ class BuildModel:
         self.encoder_states = 0
 
         # 임베딩 레이어
-        self.decoder_embedding = layers.Embedding(len(self.words), self.embedding_dim)
+        self.decoder_embedding = layers.Embedding(self.len_words, self.embedding_dim)
 
         # 목표 문장의 인덱스 시퀀스를 입력으로 받음
         self.decoder_inputs = layers.Input(shape=(None,))
@@ -26,7 +25,7 @@ class BuildModel:
                                         return_sequences=True)
 
         # 단어의 개수만큼 노드의 개수를 설정하여 원핫 형식으로 각 단어 인덱스를 출력
-        self.decoder_dense = layers.Dense(len(self.words), activation='softmax')
+        self.decoder_dense = layers.Dense(self.len_words, activation='softmax')
 
         self.decoder_outputs = 0
 
@@ -36,7 +35,7 @@ class BuildModel:
         # --------------------------------------------
 
         # 임베딩 레이어
-        encoder_outputs = layers.Embedding(len(self.words), self.embedding_dim)(self.encoder_inputs)
+        encoder_outputs = layers.Embedding(self.len_words, self.embedding_dim)(self.encoder_inputs)
 
         # return_state 가 True 면 상태값 리턴
         # LSTM 은 state_h(hidden state)와 state_c(cell state) 2개의 상태 존재

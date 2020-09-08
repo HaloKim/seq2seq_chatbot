@@ -83,6 +83,14 @@ class DataLoader:
         with open('i2w.pkl', 'wb') as f:
             pickle.dump(self.index_to_word, f)
 
+    def set_word_dic(self):
+        with open('w2i.pkl', 'rb') as f:
+            self.word_to_index = pickle.load(f)
+        with open('i2w.pkl', 'rb') as f:
+            self.index_to_word = pickle.load(f)
+
+        return self.word_to_index, self.index_to_word
+
     def return_data(self):
         return self.word_to_index, self.index_to_word
 

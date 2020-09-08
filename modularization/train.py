@@ -43,7 +43,6 @@ class Train:
             input_decoder = x_decoder[2].reshape(1, x_decoder[2].shape[0])
             results = model.predict([input_encoder, input_decoder])
 
-
             # 결과의 원핫인코딩 형식을 인덱스로 변환
             # 1축을 기준으로 가장 높은 값의 위치를 구함
             self.indexs = np.argmax(results[0], 1)
